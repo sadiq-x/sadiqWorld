@@ -3,6 +3,7 @@ const app = express()
 const PORT = process.env.PORTSRV || 4099;
 
 app.use(express.json())
+//app.use(express.urlencoded({extended: true})) //Not used 
 
 function server(){
     app.listen(PORT, ()=>{
@@ -10,10 +11,13 @@ function server(){
     })
 }
 
-import {generateToken} from '../authorization/index.js'
-//generateToken()
+import {generateToken,verifytoken} from '../authorization/index.js';
+app.post('/generatetoken',generateToken)
+app.post('/verifytoken',verifytoken)
 
-app.post('/generatetoken',generateToken,()=>{})
+app.get('/dd',(req,res)=>{
+    res.send('oK')
+})
 
 server()
 
