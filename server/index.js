@@ -16,6 +16,7 @@ app.post('/generatetoken',generateToken)
 app.post('/verifytoken',verifytoken)
 
 app.get('/dd',(req,res)=>{
+    //console.log(res.header())
     res.send('oK')
 })
 

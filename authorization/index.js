@@ -10,10 +10,10 @@ export function generateToken(req,res){
     if (req.body.name){
         payload.id = req.body.name
         const token = jwtSign()
-        if (token){
+        const verify = jwtVerify(token)
+        if (verify){
             res.header('Authorization','ok')
-            res.sendStatus(200)
-            console.log({'jwtToken':token})
+            res.status(200).json(token)
         }
     }else {
         res.sendStatus(400)
@@ -28,9 +28,9 @@ export function verifytoken(req,res){
         const token = req.body.token
         const decoded = jwtVerify(token)
         if (decoded){
-            res.send('200')
+            res.sendStatus(200)
         }else{
-            res.send('400')
+            res.sendStatus(400)
         }
     }
 }
